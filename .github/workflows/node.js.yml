@@ -21,6 +21,5 @@ jobs:
             docker-compose up -d
             docker-compose run web npx knex migrate:latest
             docker-compose run web npx knex seed:run
-            docker-compose run web npm test
     
-    - run: npm test
+    - run: docker-compose run web npm test
