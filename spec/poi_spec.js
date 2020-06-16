@@ -11,7 +11,7 @@ describe("Poi interactor", () => {
 
     it("should retrieve all pois", (done) => {
         interactor.getAllPois().then((result) => {
-            expect(result.length).toBe(4)
+            expect(result.length).toBe(3)
             done()
         })
     })
