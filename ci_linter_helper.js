@@ -20,7 +20,7 @@ async function run(target_response) {
   const eslint = new ESLint();
 
   // 2. Lint files.
-  console.log("TA PASSANDO AQUI: ", count)
+  console.log(files)
   const results = await eslint.lintFiles(files);
 
   // 3. Format the results.
@@ -51,7 +51,6 @@ result("git diff --name-only HEAD origin/master", async function(err, response) 
         files = response_array.filter((item) => {
             return item.indexOf(".js") !== -1 && !item.includes("node_modules")
         })
-        console.log(files)
         resulthead = await run()
         console.log("Foi aqui que rolou o print")
         console.log(resulthead)
