@@ -29,7 +29,7 @@ async function run(target_response) {
 
   // 4. Output it.
   console.log(resultText);
-  target_response =  resultText
+  target_response = resultText
 }
 
 var result = function(command, cb){
@@ -51,7 +51,7 @@ result("git diff --name-only HEAD origin/master", async function(err, response) 
         files = response_array.filter((item) => {
             return item.indexOf(".js") !== -1 && !item.includes("node_modules")
         })
-        resulthead = await run()
+        await run(resulthead)
         console.log("Foi aqui que rolou o print")
         console.log(resulthead)
     } else {
@@ -59,18 +59,18 @@ result("git diff --name-only HEAD origin/master", async function(err, response) 
     }
 })
 
-result("git checkout master", function(err, response) {
+result("git checkout master", async function(err, response) {
     if(!err) {
         console.log("Até aqui ta indo")
         count = count + 1
-        run()
+        await run(resultmaster)
+        console.log("HEAD: ", resulthead)
+        console.log("Target: ", resultmaster)
     } else {
         console.log(err)
     }
 })
 
-console.log("HEAD: ", resulthead)
-console.log("Target: ", resultmaster)
 
 
 
