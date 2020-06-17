@@ -44,7 +44,7 @@ var result = function(command, cb){
     });
 }
 
-result("git diff --name-only HEAD origin/master", function(err, response) {
+result("git diff --name-only HEAD origin/master", async function(err, response) {
     if(!err) {
         response_array = response.split("\n")
         // console.log(response_array)
@@ -52,7 +52,7 @@ result("git diff --name-only HEAD origin/master", function(err, response) {
             return item.indexOf(".js") !== -1 && !item.includes("node_modules")
         })
         console.log(files)
-        resulthead = run()
+        resulthead = await run()
         console.log(resulthead)
     } else {
         console.log(err)
