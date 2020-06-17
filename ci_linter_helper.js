@@ -20,7 +20,7 @@ async function run(target_response) {
   const eslint = new ESLint();
 
   // 2. Lint files.
-  console.log(files)
+  console.log("TA PASSANDO AQUI")
   const results = await eslint.lintFiles(files);
 
   // 3. Format the results.
