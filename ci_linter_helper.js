@@ -53,6 +53,7 @@ result("git diff --name-only HEAD origin/master", async function(err, response) 
         })
         console.log(files)
         resulthead = await run()
+        console.log("Foi aqui que rolou o print")
         console.log(resulthead)
     } else {
         console.log(err)
