@@ -12,9 +12,10 @@ const { ESLint } = require("eslint");
 
 let files = null
 let resulthead = null
+let resultmaster = null
 var exec = require('child_process').exec;
 
-async function run() {
+async function run(target_response) {
   // 1. Create an instance.
   const eslint = new ESLint();
 
@@ -28,7 +29,7 @@ async function run() {
 
   // 4. Output it.
   console.log(resultText);
-  resulthead =  resultText
+  target_response =  resultText
 }
 
 var result = function(command, cb){
@@ -60,6 +61,7 @@ result("git diff --name-only HEAD origin/master", function(err, response) {
 
 result("git checkout master", function(err, response) {
     if(!err) {
+        console.log("Até aqui ta indo")
         run()
     } else {
         console.log(err)
