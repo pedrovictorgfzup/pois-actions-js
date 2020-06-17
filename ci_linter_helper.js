@@ -3,3 +3,7 @@ const {
   } = process.env;
 
 console.log(GITHUB_EVENT_PATH, GITHUB_SHA, GITHUB_TOKEN, GITHUB_WORKSPACE, ESLINT_RC, EXECUTE_ON_FILES)
+
+const event = require(GITHUB_EVENT_PATH);
+
+console.log(event)
