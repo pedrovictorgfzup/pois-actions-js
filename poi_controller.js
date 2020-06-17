@@ -37,3 +37,4 @@ exports.plugin = {
       server.route({ method: 'DELETE', path: '/pois/{poi_id}', config: { handler: PoiController.deletePoi }})
   }
 };
+
