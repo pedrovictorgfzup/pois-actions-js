@@ -42,9 +42,13 @@ var result = function(command, cb){
     });
 }
 
-result("git checkout master", function(err, response) {
+result("git diff --name-only HEAD origin/master", function(err, response) {
     if(!err) {
-        console.log(response)
+        response_array = response.split("\n")
+        // console.log(response_array)
+        console.log(response_array.filter((item) => {
+            return item.indexOf(".js") !== -1 && !item.includes("node_modules")
+        }))
     } else {
         console.log("ERRO")
         console.log(err)
