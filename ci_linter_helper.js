@@ -64,7 +64,7 @@ result("git checkout master", function(err, response) {
     if(!err) {
         console.log("Até aqui ta indo")
         count = count + 1
-        // run()
+        run()
     } else {
         console.log(err)
     }
