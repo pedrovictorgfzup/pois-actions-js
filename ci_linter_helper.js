@@ -69,6 +69,8 @@ result("git checkout master", function(err, response) {
     }
 })
 
+console.log("HEAD: ", resulthead)
+console.log("Target: ", resultmaster)
 
 
 
