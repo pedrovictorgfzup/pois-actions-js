@@ -9,7 +9,7 @@
 // console.log(event)
 
 const { ESLint } = require("eslint");
-
+let count = 0
 let files = null
 let resulthead = null
 let resultmaster = null
@@ -20,7 +20,7 @@ async function run(target_response) {
   const eslint = new ESLint();
 
   // 2. Lint files.
-  console.log("TA PASSANDO AQUI")
+  console.log("TA PASSANDO AQUI: ", count)
   const results = await eslint.lintFiles(files);
 
   // 3. Format the results.
@@ -63,7 +63,8 @@ result("git diff --name-only HEAD origin/master", async function(err, response) 
 result("git checkout master", function(err, response) {
     if(!err) {
         console.log("Até aqui ta indo")
-        run()
+        count = count + 1
+        // run()
     } else {
         console.log(err)
     }
