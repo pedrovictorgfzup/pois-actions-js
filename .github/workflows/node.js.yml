@@ -30,7 +30,4 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - uses: a-b-r-o-w-n/eslint-action@v1
-        with:
-          repo-token: "${{ secrets.CI_TOKEN }}"
-          extensions: ".js"
+      - run: node ci_linter_helper.js
