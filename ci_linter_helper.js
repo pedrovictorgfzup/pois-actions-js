@@ -48,7 +48,8 @@ bash_exec.run_bash_cmd("git diff --name-only HEAD origin/master", async function
         resulthead = await run()
         bash_exec.run_bash_cmd("git checkout master", function(err, response) {
             if(!err) {
-                run()
+                resultmaster = await run()
+                console.log(resultmaster)
             } else {
                 console.log(err)
             }
