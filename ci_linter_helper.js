@@ -41,7 +41,10 @@ bash_exec.run_bash_cmd("git diff --name-only HEAD origin/master", function(err, 
             return item.indexOf(".js") !== -1 && !item.includes("node_modules")
         })
         console.log(files)
-        resulthead = run()
+        resulthead = run().catch((error) => {
+            process.exitCode = 1;
+            console.error(error);
+          });
         console.log(resulthead)
     } else {
         console.log(err)
