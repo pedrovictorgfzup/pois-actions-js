@@ -60,6 +60,7 @@ async function run_linter() {
 (async function main() {
     source_report, target_report = await run_linter()
 
+    console.log("JUST TO SEE")
     console.log("SOURCE: ", source_report)
     console.log("TARGET: ", target_report)
 })
