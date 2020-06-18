@@ -60,11 +60,13 @@ async function run_linter(cb) {
     })
 }
 
+function do_linter_checks(source_report, target_report) {
+    console.log("JUST TO SEE")
+    console.log("SOURCE: ", source_report)
+    console.log("TARGET: ", target_report)
+}
+
 
 (async function main() {
-    run_linter((source_report, target_report) => {
-        console.log("JUST TO SEE")
-        console.log("SOURCE: ", source_report)
-        console.log("TARGET: ", target_report)
-    })
+    run_linter(do_linter_checks)
 })()
