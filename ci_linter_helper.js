@@ -44,7 +44,7 @@ async function run_linter(cb) {
             bash_exec.run_bash_cmd("git checkout master", async function(err, response) {
                 if(!err) {
                     let target_report = await run(files)
-                    return cb(source_report, target_report)
+                    cb(source_report, target_report)
                     // console.log(target_report)
 
                     // console.log("SOURCE: ", source_report)
