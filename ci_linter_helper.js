@@ -94,6 +94,7 @@ function calculate_hash_obj(report) {
         file.messages.forEach( (offense, index) => {
             if (!offense.ruleId.toString() in hash[file.filePath]) {
                 hash[file.filePath][offense.ruleId.toString()] = 1
+                console.log(hash[file.filePath])
             } else {
                 console.log("What about here", offense.ruleId, hash[file.filePath])
                 hash[file.filePath][offense.ruleId.toString()] += 1
