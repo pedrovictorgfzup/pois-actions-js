@@ -63,4 +63,4 @@ async function run_linter() {
     console.log("JUST TO SEE")
     console.log("SOURCE: ", source_report)
     console.log("TARGET: ", target_report)
-})
+})()
