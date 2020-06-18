@@ -46,8 +46,8 @@ async function run_linter(source_report, target_report) {
                     target_report = await run(files)
                     // console.log(target_report)
 
-                    console.log("SOURCE: ", source_report)
-                    console.log("TARGET: ", target_report)
+                    // console.log("SOURCE: ", source_report)
+                    // console.log("TARGET: ", target_report)
                     // return source_report, target_report
                 } else {
                     console.log(err)
@@ -62,9 +62,9 @@ async function run_linter(source_report, target_report) {
 
 (async function main() {
     let source_report, target_report = null
-    await run_linter(source_report, target_report)
-
-    console.log("JUST TO SEE")
-    console.log("SOURCE: ", source_report)
-    console.log("TARGET: ", target_report)
+    run_linter(source_report, target_report).then(() => {
+        console.log("JUST TO SEE")
+        console.log("SOURCE: ", source_report)
+        console.log("TARGET: ", target_report)
+    })
 })()
