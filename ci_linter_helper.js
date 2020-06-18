@@ -95,8 +95,7 @@ function calculate_hash_obj(report) {
             if (offense.ruleId in hash[file.filePath]) {
                 hash[file.filePath][offense.ruleId.toString()] = 1
             } else {
-                console.log("What about here", offense.ruleId, hash[file.filePath][offense.ruleId])
-                console.log(hash)
+                console.log("What about here", offense.ruleId, hash[file.filePath])
                 hash[file.filePath][offense.ruleId.toString()] += 1
             }
         })
