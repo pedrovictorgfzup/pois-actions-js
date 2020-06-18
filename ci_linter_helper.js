@@ -10,6 +10,7 @@
 
 const { ESLint } = require("eslint");
 const bash_exec = require("./exec_process.js")
+const fs = require('fs')
 
 let files = null
 let resulthead = null
@@ -19,6 +20,9 @@ async function run() {
   const eslint = new ESLint();
 
   // 2. Lint files.
+  files = files.filter((file) => {
+      return fs.existsSync(file)
+  })
   console.log(files)
   const results = await eslint.lintFiles(files);
 
@@ -41,18 +45,7 @@ bash_exec.run_bash_cmd("git diff --name-only HEAD origin/master", async function
             return item.indexOf(".js") !== -1 && !item.includes("node_modules")
         })
 
-        resulthead = await run().catch((error) => {
-            if (error.messageTemplate === 'file-not-found') {
-                files = files.filter((file) => {
-                    return file !== error.messageData["pattern"]
-                })
-
-                run();
-            } else {
-                process.exitCode = 1;
-                console.error(error);
-                }
-          });
+        resulthead = await run()
         console.log(resulthead)
     } else {
         console.log(err)
