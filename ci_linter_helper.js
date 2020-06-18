@@ -56,7 +56,10 @@ async function run_linter() {
     })
 }
 
-source_report, target_report = await run_linter()
 
-console.log("SOURCE: ", source_report)
-console.log("TARGET: ", target_report)
+(async function main() {
+    source_report, target_report = await run_linter()
+
+    console.log("SOURCE: ", source_report)
+    console.log("TARGET: ", target_report)
+})
