@@ -45,6 +45,9 @@ async function run_linter() {
                 if(!err) {
                     let target_report = await run(files)
                     // console.log(target_report)
+
+                    console.log("SOURCE: ", source_report)
+                    console.log("TARGET: ", target_report)
                     return source_report, target_report
                 } else {
                     console.log(err)
