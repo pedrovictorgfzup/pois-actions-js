@@ -32,23 +32,23 @@ async function run(files) {
   return resultText
 }
 
-async function run_linter() {
+async function run_linter(source_report, target_report) {
     bash_exec.run_bash_cmd("git diff --name-only HEAD origin/master", async function(err, response) {
         if(!err) {
             let files = response.split("\n").filter((file_name) => {
                 return file_name.indexOf(".js") !== -1 && !file_name.includes("node_modules")
             })
 
-            let source_report = await run(files)
+            source_report = await run(files)
             // console.log(source_report)
             bash_exec.run_bash_cmd("git checkout master", async function(err, response) {
                 if(!err) {
-                    let target_report = await run(files)
+                    target_report = await run(files)
                     // console.log(target_report)
 
                     console.log("SOURCE: ", source_report)
                     console.log("TARGET: ", target_report)
-                    return source_report, target_report
+                    // return source_report, target_report
                 } else {
                     console.log(err)
                 }
@@ -61,7 +61,8 @@ async function run_linter() {
 
 
 (async function main() {
-    let source_report, target_report = await run_linter()
+    let source_report, target_report = null
+    await run_linter(source_report, target_report)
 
     console.log("JUST TO SEE")
     console.log("SOURCE: ", source_report)
