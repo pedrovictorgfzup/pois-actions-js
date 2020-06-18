@@ -45,14 +45,13 @@ bash_exec.run_bash_cmd("git diff --name-only HEAD origin/master", async function
             return item.indexOf(".js") !== -1 && !item.includes("node_modules")
         })
 
-        resulthead = await run().then(() => {
-            bash_exec.run_bash_cmd("git checkout master", function(err, response) {
-                if(!err) {
-                    run()
-                } else {
-                    console.log(err)
-                }
-            })
+        resulthead = await run()
+        bash_exec.run_bash_cmd("git checkout master", function(err, response) {
+            if(!err) {
+                run()
+            } else {
+                console.log(err)
+            }
         })
         console.log(resulthead)
     } else {
