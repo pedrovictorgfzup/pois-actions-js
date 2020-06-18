@@ -61,9 +61,18 @@ async function run_linter(cb) {
 }
 
 function do_linter_checks(source_report, target_report) {
-    console.log("JUST TO SEE")
-    console.log("SOURCE: ", source_report)
-    console.log("TARGET: ", target_report)
+    source_total_offenses = source_report
+                                        .map( file => file.errorCount)
+                                            .reduce((total, current) => {
+                                                return total + current
+                                            })
+    target_total_offenses = target_report
+                                        .map( file => file.errorCount)
+                                            .reduce((total, current) => {
+                                                return total + current
+                                            })
+    console.log("SOURCE: ", source_total_offenses)
+    console.log("TARGET: ", target_total_offenses)
 }
 
 
