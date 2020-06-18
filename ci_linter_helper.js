@@ -12,10 +12,7 @@ const { ESLint } = require("eslint");
 const bash_exec = require("./exec_process.js")
 const fs = require('fs')
 
-let files = null
-let resulthead = null
-
-async function run() {
+async function run(files) {
   // 1. Create an instance.
   const eslint = new ESLint();
 
@@ -35,27 +32,31 @@ async function run() {
   return resultText
 }
 
+async function run_linter() {
+    bash_exec.run_bash_cmd("git diff --name-only HEAD origin/master", async function(err, response) {
+        if(!err) {
+            let files = response.split("\n").filter((file_name) => {
+                return file_name.indexOf(".js") !== -1 && !file_name.includes("node_modules")
+            })
 
+            let source_report = await run(files)
+            // console.log(source_report)
+            bash_exec.run_bash_cmd("git checkout master", async function(err, response) {
+                if(!err) {
+                    let target_report = await run(files)
+                    // console.log(target_report)
+                    return source_report, target_report
+                } else {
+                    console.log(err)
+                }
+            })
+        } else {
+            console.log(err)
+        }
+    })
+}
 
-bash_exec.run_bash_cmd("git diff --name-only HEAD origin/master", async function(err, response) {
-    if(!err) {
-        response_array = response.split("\n")
+source_report, target_report = await run_linter()
 
-        files = response_array.filter((item) => {
-            return item.indexOf(".js") !== -1 && !item.includes("node_modules")
-        })
-
-        resulthead = await run()
-        bash_exec.run_bash_cmd("git checkout master", async function(err, response) {
-            if(!err) {
-                resultmaster = await run()
-                console.log(resultmaster)
-            } else {
-                console.log(err)
-            }
-        })
-        console.log(resulthead)
-    } else {
-        console.log(err)
-    }
-})
+console.log("SOURCE: ", source_report)
+console.log("TARGET: ", target_report)
