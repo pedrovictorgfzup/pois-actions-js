@@ -63,25 +63,21 @@ async function run_linter(cb) {
 function do_linter_checks(source_report, target_report) {
     console.log("SOURCE: ", source_report)
     console.log("TARGET: ", target_report)
-    // let source_total_offenses = source_report.then((files) => {
-    //     return files.map( file => file.errorCount)
-    //                 .reduce((total, current) => {
-    //                     return total + current
-    //                 })
-    // })
-                                        
-    // let target_total_offenses = target_report.then((files) => {
-    //     return files.map( file => file.errorCount)
-    //                 .reduce((total, current) => {
-    //                     return total + current
-    //                 })
-    // })
     let source_total_offenses =  source_report.map( file => file.errorCount ).reduce((total, current) => {
+        return total+current
+    })
+    let target_total_offenses =  target_report.map( file => file.errorCount ).reduce((total, current) => {
         return total+current
     })
                                        
     console.log("SOURCE: ", source_total_offenses)
-    // console.log("TARGET: ", target_total_offenses)
+    console.log("TARGET: ", target_total_offenses)
+
+    if (source_total_offenses > target_total_offenses) {
+        console.log("You nasty boy have incremented the number os offenses")
+    } else {
+        console.log("Congrats you've managed to not increase the number os offenses")
+    }
 }
 
 
