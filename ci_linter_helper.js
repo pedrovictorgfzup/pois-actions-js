@@ -51,16 +51,16 @@ bash_exec.run_bash_cmd("git diff --name-only HEAD origin/master", function(err, 
     }
 })
 
-bash_exec.run_bash_cmd("git checkout master", function(err, response) {
-    if(!err) {
-        run().catch((error) => {
-            process.exitCode = 1;
-            console.error(error);
-          });
-    } else {
-        console.log(err)
-    }
-})
+// bash_exec.run_bash_cmd("git checkout master", function(err, response) {
+//     if(!err) {
+//         run().catch((error) => {
+//             process.exitCode = 1;
+//             console.error(error);
+//           });
+//     } else {
+//         console.log(err)
+//     }
+// })
 
 
 
