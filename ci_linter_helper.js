@@ -75,11 +75,33 @@ function do_linter_checks(source_report, target_report) {
 
     if (source_total_offenses > target_total_offenses) {
         console.log("You nasty boy have incremented the number os offenses")
+        source_hash = calculate_hash_obj(source_report)
+        target_hash = calculate_hash_obj(target_report)
+
+        console.log("SOURCE HASH: ", source_hash)
+        console.log("TARGET HASH: ", target_hash)
     } else {
         console.log("Congrats you've managed to not increase the number os offenses")
     }
 }
 
+function calculate_hash_obj(report) {
+    hash = {}
+
+    report.forEach( (file, index) => {
+        hash[file.filePath] = { }
+
+        file.messages.forEach( (offense, index) => {
+            if (offense.ruleId in hash[file.filePath]) {
+                hash[file.filePath][offense.ruleId] = 1
+            } else {
+                hash[file.filePath][offense.ruleId] += 1
+            }
+        })
+    })
+
+    return hash
+}
 
 (async function main() {
     run_linter(do_linter_checks)
