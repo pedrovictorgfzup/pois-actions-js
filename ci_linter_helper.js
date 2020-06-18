@@ -26,22 +26,22 @@ async function run() {
   const formatter = await eslint.loadFormatter("json");
   const resultText = formatter.format(results);
 
-  // 4. Output it.
-  console.log(resultText);
-  resulthead =  resultText
+//   // 4. Output it.
+//   console.log("Inside linter run", resultText);
+  return resultText
 }
 
 
 
-bash_exec.run_bash_cmd("git diff --name-only HEAD origin/master", function(err, response) {
+bash_exec.run_bash_cmd("git diff --name-only HEAD origin/master", async function(err, response) {
     if(!err) {
         response_array = response.split("\n")
-        // console.log(response_array)
+
         files = response_array.filter((item) => {
             return item.indexOf(".js") !== -1 && !item.includes("node_modules")
         })
-        console.log(files)
-        resulthead = run().catch((error) => {
+
+        resulthead = await run().catch((error) => {
             if (error.messageTemplate === 'file-not-found') {
                 files = files.filter((file) => {
                     return file !== error.messageData["pattern"]
@@ -69,12 +69,3 @@ bash_exec.run_bash_cmd("git checkout master", function(err, response) {
         console.log(err)
     }
 })
-
-
-
-
-
-
-
-
-
