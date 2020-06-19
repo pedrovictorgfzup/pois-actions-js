@@ -78,8 +78,15 @@ function do_linter_checks(source_report, target_report) {
         source_hash = calculate_hash_obj(source_report)
         target_hash = calculate_hash_obj(target_report)
 
-        console.log("SOURCE HASH: ", source_hash)
-        console.log("TARGET HASH: ", target_hash)
+
+        for (file in source_hash) {
+            for(offense in source_hash[file]) {
+                offense_quantity = file[offense] - (target_hash[file][offense] || 0)
+                if (offense_quantity > 0) {
+                    console.log(`${offense_quantity} ${offense} were added to ${file}`)
+                }
+            }
+        }
     } else {
         console.log("Congrats you've managed to not increase the number os offenses")
     }
