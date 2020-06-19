@@ -78,12 +78,12 @@ function do_linter_checks(source_report, target_report) {
 
         for (file in source_hash) {
             console.log("FILE: ", file)
-            if(file !== undefined && source_hash.hasOwnProperty(file)) {
+            if(file !== undefined || source_hash.hasOwnProperty(file)) {
                 for(offense in source_hash[file]) {
                     console.log("OFFENSE: ", offense)
                     console.log("SOURCE_HASH[FILE]: ", source_hash[file])
                     console.log("TARGET_HASH[FILE]: ", target_hash[file])
-                    if(offense !== undefined && source_hash[file].hasOwnProperty(offense)){
+                    if(offense !== undefined || source_hash[file].hasOwnProperty(offense)){
                         offense_quantity = file[offense] - (target_hash[file][offense] || 0)
                         if (offense_quantity > 0) {
                             console.log(`${offense_quantity} ${offense} were added to ${file}`)
