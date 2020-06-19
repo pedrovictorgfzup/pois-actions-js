@@ -2,7 +2,7 @@ FROM node:12
 
 # RUN apk add --update build-base git
 
-RUN npm install eslint
+RUN npm install eslint && eslint-config-google
 RUN npm install knex
 
 
