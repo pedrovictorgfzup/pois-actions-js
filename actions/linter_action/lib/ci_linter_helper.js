@@ -54,26 +54,28 @@ function do_linter_checks(source_report, target_report) {
 
     if (source_total_offenses > target_total_offenses) {
         console.log("You nasty boy have incremented the number os offenses")
-        source_hash = calculate_hash_obj(source_report)
-        target_hash = calculate_hash_obj(target_report)
+        source_offenses = calculate_hash_obj(source_report)
+        target_offenses = calculate_hash_obj(target_report)
 
+        show_offenses_added(source_offenses, target_offenses)
+        process.exit(1)
+    } else {
+        console.log("Congrats you've managed to not increase the number os offenses")
+    }
+}
 
-        for (file in source_hash) {
-            if(file !== undefined || source_hash.hasOwnProperty(file)) {
-                for(offense in source_hash[file]) {
-                    if(offense !== undefined || source_hash[file].hasOwnProperty(offense)){
-                        offense_quantity = source_hash[file][offense] - (target_hash[file] && target_hash[file][offense] || 0)
-                        if (offense_quantity > 0) {
-                            console.log(`${offense_quantity} ${offense} were added to ${file}`)
-                        }
+function show_offenses_added(source_offenses, target_offenses) {
+    for (file in source_offenses) {
+        if(file !== undefined || source_offenses.hasOwnProperty(file)) {
+            for(offense in source_offenses[file]) {
+                if(offense !== undefined || source_offenses[file].hasOwnProperty(offense)){
+                    offense_quantity = source_offenses[file][offense] - (target_offenses[file] && target_offenses[file][offense] || 0)
+                    if (offense_quantity > 0) {
+                        console.log(`${offense_quantity} ${offense} were added to ${file}`)
                     }
                 }
             }
         }
-
-        process.exit(1)
-    } else {
-        console.log("Congrats you've managed to not increase the number os offenses")
     }
 }
 
