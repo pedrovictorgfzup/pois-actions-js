@@ -22,7 +22,7 @@ async function run(files) {
 }
 
 async function run_linter(cb) {
-    bash_exec.run_bash_cmd("git diff --name-only HEAD origin/master", async function(err, response) {
+    bash_exec.run_bash_cmd(`git diff --name-only HEAD origin/${process.argv[2]}`, async function(err, response) {
         if(!err) {
             let files = response.split("\n").filter((file_name) => {
                 return file_name.indexOf(".js") !== -1 && !file_name.includes("node_modules")
@@ -30,7 +30,7 @@ async function run_linter(cb) {
 
             let source_report = await run(files)
 
-            bash_exec.run_bash_cmd("git checkout master", async function(err, response) {
+            bash_exec.run_bash_cmd(`git checkout ${process.argv[2]}`, async function(err, response) {
                 if(!err) {
                     let target_report = await run(files)
                     cb(source_report, target_report)
