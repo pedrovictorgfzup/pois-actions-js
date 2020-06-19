@@ -83,6 +83,7 @@ function do_linter_checks(source_report, target_report) {
             if(source_hash.hasOwnProperty(file)) {
                 for(offense in source_hash[file]) {
                     if(source_hash[file].hasOwnProperty(offense)){
+                        console.log(file, offense, target_hash)
                         offense_quantity = file[offense] - (target_hash[file][offense] || 0)
                         if (offense_quantity > 0) {
                             console.log(`${offense_quantity} ${offense} were added to ${file}`)
