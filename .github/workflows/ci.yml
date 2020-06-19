@@ -30,6 +30,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+      - run: git fetch origin ${{ github.base_ref }}
       - name: Setup Node.js environment
         uses: actions/setup-node@v1.4.2
         with: 
