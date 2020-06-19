@@ -70,6 +70,8 @@ function do_linter_checks(source_report, target_report) {
                 }
             }
         }
+
+        process.exit(1)
     } else {
         console.log("Congrats you've managed to not increase the number os offenses")
     }
