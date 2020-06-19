@@ -69,9 +69,6 @@ function do_linter_checks(source_report, target_report) {
     let target_total_offenses =  target_report.map( file => file.errorCount ).reduce((total, current) => {
         return total+current
     })
-                                       
-    console.log("SOURCE: ", source_total_offenses)
-    console.log("TARGET: ", target_total_offenses)
 
     if (source_total_offenses > target_total_offenses) {
         console.log("You nasty boy have incremented the number os offenses")
@@ -80,10 +77,13 @@ function do_linter_checks(source_report, target_report) {
 
 
         for (file in source_hash) {
+            console.log("FILE: ", file)
             if(file !== undefined && source_hash.hasOwnProperty(file)) {
                 for(offense in source_hash[file]) {
+                    console.log("OFFENSE: ", offense)
+                    console.log("SOURCE_HASH[FILE]: ", source_hash[file])
+                    console.log("TARGET_HASH[FILE]: ", target_hash[file])
                     if(offense !== undefined && source_hash[file].hasOwnProperty(offense)){
-                        console.log(file, offense, target_hash)
                         offense_quantity = file[offense] - (target_hash[file][offense] || 0)
                         if (offense_quantity > 0) {
                             console.log(`${offense_quantity} ${offense} were added to ${file}`)
@@ -106,9 +106,7 @@ function calculate_hash_obj(report) {
         file.messages.forEach( (offense, index) => {
             if (!(offense.ruleId.toString() in hash[file.filePath])) {
                 hash[file.filePath][offense.ruleId.toString()] = 1
-                console.log(hash[file.filePath])
             } else {
-                // console.log("What about here", offense.ruleId, hash[file.filePath])
                 hash[file.filePath][offense.ruleId.toString()] += 1
             }
         })
