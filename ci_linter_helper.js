@@ -84,6 +84,7 @@ function do_linter_checks(source_report, target_report) {
                     console.log("SOURCE_HASH[FILE]: ", source_hash[file])
                     console.log("TARGET_HASH[FILE]: ", target_hash[file])
                     if(offense !== undefined || source_hash[file].hasOwnProperty(offense)){
+                        console.log("FILE[OFFENSE] :", file[offense])
                         offense_quantity = file[offense] - (target_hash[file] && target_hash[file][offense] || 0)
                         if (offense_quantity > 0) {
                             console.log(`${offense_quantity} ${offense} were added to ${file}`)
