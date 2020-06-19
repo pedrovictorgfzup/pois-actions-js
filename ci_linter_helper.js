@@ -87,6 +87,8 @@ function do_linter_checks(source_report, target_report) {
                         offense_quantity = file[offense] - (target_hash[file] && target_hash[file][offense] || 0)
                         if (offense_quantity > 0) {
                             console.log(`${offense_quantity} ${offense} were added to ${file}`)
+                        } else {
+                            console.log("total: ", offense_quantity)
                         }
                     }
                 }
