@@ -1,6 +1,6 @@
 FROM node:12
 
-RUN apk add --update build-base git
+# RUN apk add --update build-base git
 
 RUN npm install eslint
 RUN npm install knex
